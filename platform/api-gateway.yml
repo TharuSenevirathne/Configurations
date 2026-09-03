@@ -1,0 +1,31 @@
+server:
+  port: 7000
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: user-service
+              uri: lb://user-service
+              predicates:
+                - Path=/api/users,/api/users/**
+            - id: ticket-service
+              uri: lb://ticket-service
+              predicates:
+                - Path=/api/tickets,/api/tickets/**
+            - id: attachment-service
+              uri: lb://attachment-service
+              predicates:
+                - Path=/api/attachments,/api/attachments/**
+
+          default-filters:
+            - PreserveHostHeader
+
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins: "*"
+                allowed-methods: "*"
+                allowed-headers: "*"

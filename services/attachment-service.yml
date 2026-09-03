@@ -1,0 +1,16 @@
+server:
+  port: 8001
+
+spring:
+  mvc:
+    problemdetails:
+      enabled: true
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: eca
+      username: root
+      password: 1234
+      authentication-database: admin
