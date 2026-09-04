@@ -1,11 +1,56 @@
+#server:
+#  port: 0
+#
+#spring:
+#  mvc:
+#    problemdetails:
+#      enabled: true
+#
+#  data:
+#    mongodb:
+#      host: localhost
+#      port: 27017
+#      database: eca
+#      username: root
+#      password: 1234
+#      authentication-database: admin
+#
+#  spring:
+#    application:
+#      name: attachment-service
+#
+#    config:
+#      import: "configserver:"
+#
+#    cloud:
+#      config:
+#        uri: http://localhost:9000
+#
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:9001/eureka/
+#    register-with-eureka: true
+#    fetch-registry: true
+#  instance:
+#    prefer-ip-address: true
+#    instance-id: ${spring.application.name}:${random.uuid}
+
+
 server:
-  port: 8001
+  port: 0
 
 spring:
+  application:
+    name: attachment-service
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      uri: http://localhost:9000
   mvc:
     problemdetails:
       enabled: true
-
   data:
     mongodb:
       host: localhost
@@ -14,3 +59,14 @@ spring:
       username: root
       password: 1234
       authentication-database: admin
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
+
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.uuid}

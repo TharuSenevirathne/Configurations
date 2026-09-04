@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 0
   forward-headers-strategy: framework
 
   app:
@@ -7,12 +7,15 @@ server:
       path: ${user.home}/.ijse/eca/tickets
 
 spring:
+  application:
+    name: ticket-service
+
   mvc:
     problemdetails:
       enabled: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/eca?createDatabaseIfNotExist=true
+    url: jdbc:postgresql://localhost:5432/eca
     username: postgres
     password: 1234
     driver-class-name: org.postgresql.Driver
@@ -31,3 +34,14 @@ spring:
       enabled: true
       max-file-size: 5MB
       max-request-size: 10MB
+
+eureka:
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${random.uuid}
+
+  client:
+    service-url:
+      defaultZone: http://localhost:9001/eureka/
+    register-with-eureka: true
+    fetch-registry: true
